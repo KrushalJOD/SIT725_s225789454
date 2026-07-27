@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIT 725 3.2P - Recipe Explorer</title>
+  <meta name="description" content="Recipe Explorer - SIT725 3.2P Getting Graphical">
+  <meta name="author" content="Krushal">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Custom Style Sheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper navbar-size">
+      <a href="#" class="brand-logo">
+        <i class="material-icons left">restaurant_menu</i>Recipe Explorer
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a target="_blank" href="https://github.com/KrushalJOD/SIT725_s225789454">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main-body">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 center-align">
+          <h1 id="heading">Welcome to Recipe Explorer</h1>
+          <p class="flow-text">
+            This is a demo web application built with Express and Materialize for SIT725 3.2P.
+            It fetches recipe data from a simple GET REST endpoint (<code>/api/recipes</code>)
+            and renders it as Materialize cards.
+          </p>
+        </div>
+        <div class="col s12 center-align">
+          <a class="waves-effect waves-light btn suggest-button modal-trigger"
+             id="suggestButton" data-target="modal1">
+            <i class="material-icons left">add</i>Suggest a Recipe
+          </a>
+        </div>
+      </div>
+
+      <!-- Cards are injected here dynamically by js/scripts.js from /api/recipes -->
+      <div class="row" id="card-section"></div>
+    </div>
+  </main>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="row modal-content">
+      <h5>Suggest a new recipe</h5>
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="recipe_title" type="text" class="validate">
+            <label for="recipe_title">Recipe Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="recipe_category" type="text" class="validate">
+            <label for="recipe_category">Category</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="recipe_image" type="text" class="validate">
+            <label for="recipe_image">Image URL</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="recipe_description" class="materialize-textarea validate"></textarea>
+            <label for="recipe_description">Description</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 center-align">
+            <a class="waves-effect waves-light btn" id="formSubmit">submit</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+          crossorigin="anonymous"></script>
+  <!-- Compiled and minified Materialize JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+</html>

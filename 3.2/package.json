@@ -1,0 +1,22 @@
+{
+  "name": "sit725-3.2p-recipes",
+  "version": "1.0.0",
+  "description": "SIT725 3.2P - Getting Graphical - Recipe Explorer (Express + Materialize)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "Materialize",
+    "HTML",
+    "JS",
+    "CSS"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}
