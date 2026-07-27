@@ -30,7 +30,7 @@ app.get('/add', (req, res) => {
  }
 
  // Calculate the square of the number.
- const add = num1 * num2;
+ const add = num1 + num2;
 
  // Send a plain text response showing the result.
  res.send(`The addition is: ${add}`);
