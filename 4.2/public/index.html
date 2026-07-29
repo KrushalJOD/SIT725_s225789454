@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SIT725 4.2P - Board Game Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="container center-align" style="padding: 40px 0;">
+      <h3>🎲 My Board Game Library</h3>
+      <p>SIT725 4.2P - Add a Database (Board Games edition)</p>
+      <a class="btn waves-effect waves-light modal-trigger" href="#addGameModal">
+        <i class="material-icons left">add</i>Add Game
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="row" id="gameGrid">
+      <!-- Cards injected by scripts.js -->
+    </div>
+  </main>
+
+  <!-- Add Game Modal -->
+  <div id="addGameModal" class="modal">
+    <div class="modal-content">
+      <h5>Add a new board game</h5>
+      <div class="row">
+        <form class="col s12" id="gameForm">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="name" type="text" required>
+              <label for="name">Game name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <select id="category" required>
+                <option value="" disabled selected>Choose category</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Party">Party</option>
+                <option value="Cooperative">Cooperative</option>
+                <option value="Card Game">Card Game</option>
+                <option value="Family">Family</option>
+              </select>
+              <label>Category</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="players" type="number" min="1" max="20" required>
+              <label for="players">Max players</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="duration" type="number" min="5" max="480" required>
+              <label for="duration">Duration (minutes)</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="coverImage" type="text" placeholder="images/example.jpg" required>
+              <label for="coverImage">Cover image path</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="summary" class="materialize-textarea" maxlength="300" required></textarea>
+              <label for="summary">Summary</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close btn-flat">Cancel</a>
+      <a href="#!" id="formSubmit" class="btn waves-effect waves-light modal-close">Save</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

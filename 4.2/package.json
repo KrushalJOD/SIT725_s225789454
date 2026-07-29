@@ -1,0 +1,14 @@
+{
+  "name": "sit725-4-2p-boardgame-library",
+  "version": "1.0.0",
+  "description": "SIT725 4.2P - Board Game Library backed by MongoDB/Mongoose",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.5.0"
+  }
+}

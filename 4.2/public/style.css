@@ -1,0 +1,25 @@
+header {
+  background: linear-gradient(135deg, #26a69a, #2e7d32);
+  color: white;
+}
+
+.game-card {
+  height: 100%;
+}
+
+.game-card .card-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.game-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chip.category-chip {
+  background-color: #26a69a;
+  color: white;
+  font-size: 12px;
+}
