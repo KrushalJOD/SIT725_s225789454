@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Books Catalogue</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    p.sub { color: #555; margin-top: 0; }
+    button { padding: 8px 16px; cursor: pointer; margin-bottom: 16px; font-size: 14px; }
+
+    #booksList {
+      background: #eee;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+    .book-row {
+      padding: 6px 4px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .book-row:hover { background: #ddd; }
+    .book-row.selected { background: #cfe8ff; font-weight: bold; }
+
+    #bookDetails {
+      background: #f7f7f7;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 12px 16px;
+      display: none;
+    }
+    #bookDetails p { margin: 4px 0; }
+    #bookDetails .label { font-weight: bold; display: inline-block; width: 100px; }
+  </style>
+</head>
+<body>
+  <h1>Books Catalogue developed by s225789454</h1>
+  <p class="sub">Click the button below to get all books from the server:</p>
+
+  <button id="getAllBooksBtn">Get all books</button>
+
+  <div id="booksList"><em>No books loaded yet.</em></div>
+
+  <div id="bookDetails"></div>
+
+  <script>
+    const getAllBtn = document.getElementById('getAllBooksBtn');
+    const listEl = document.getElementById('booksList');
+    const detailsEl = document.getElementById('bookDetails');
+
+    function renderList(items) {
+      listEl.innerHTML = '';
+      if (!Array.isArray(items) || items.length === 0) {
+        listEl.textContent = 'No books found.';
+        return;
+      }
+      items.forEach((book) => {
+        const row = document.createElement('div');
+        row.className = 'book-row';
+        row.textContent = `${book.title} ${book.price} ${book.currency}`;
+        row.addEventListener('click', () => {
+          // only one selected row at a time
+          document.querySelectorAll('.book-row.selected').forEach((el) => el.classList.remove('selected'));
+          row.classList.add('selected');
+          loadBookDetails(book.id);
+        });
+        listEl.appendChild(row);
+      });
+    }
+
+    function renderDetails(book) {
+      detailsEl.innerHTML = `
+        <p><span class="label">Title:</span> ${book.title}</p>
+        <p><span class="label">Author:</span> ${book.author}</p>
+        <p><span class="label">Year:</span> ${book.year}</p>
+        <p><span class="label">Genre:</span> ${book.genre}</p>
+        <p><span class="label">Summary:</span> ${book.summary}</p>
+        <p><span class="label">Price (AUD):</span> ${book.price}</p>
+      `;
+      detailsEl.style.display = 'block';
+    }
+
+    async function loadAllBooks() {
+      listEl.textContent = 'Loading...';
+      detailsEl.style.display = 'none';
+      try {
+        const res = await fetch('/api/books');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const body = await res.json(); // { statusCode, data, message }
+        renderList(body.data);
+      } catch (err) {
+        console.error('Error fetching books:', err);
+        listEl.textContent = 'Error fetching books.';
+      }
+    }
+
+    async function loadBookDetails(id) {
+      try {
+        const res = await fetch(`/api/books/${id}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const body = await res.json(); // { statusCode, data, message }
+        renderDetails(body.data);
+      } catch (err) {
+        console.error('Error fetching book details:', err);
+        detailsEl.textContent = 'Error fetching book details.';
+        detailsEl.style.display = 'block';
+      }
+    }
+
+    getAllBtn.addEventListener('click', loadAllBooks);
+  </script>
+</body>
+</html>
