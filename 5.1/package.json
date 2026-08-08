@@ -1,0 +1,12 @@
+{
+  "name": "books-mvc",
+  "version": "1.0.0",
+  "description": "SIT725 5.1P - Books catalog using MVC structure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

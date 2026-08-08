@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Books Catalog</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px; }
+    h1 { margin-bottom: 4px; }
+    button { padding: 8px 16px; cursor: pointer; margin-bottom: 16px; }
+    .book { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .book-title { font-weight: bold; }
+    .book-author { color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Books Catalog</h1>
+  <button id="fetchBooksBtn">Load Books</button>
+  <div id="booksDisplay">Click "Load Books" to fetch the list.</div>
+
+  <script>
+    const btn = document.getElementById('fetchBooksBtn');
+    const out = document.getElementById('booksDisplay');
+
+    function render(items) {
+      out.innerHTML = '';
+      if (!Array.isArray(items) || items.length === 0) {
+        out.textContent = 'No items';
+        return;
+      }
+      for (const it of items) {
+        const div = document.createElement('div');
+        div.className = 'book';
+
+        const title = document.createElement('div');
+        title.className = 'book-title';
+        title.textContent = it.title;
+
+        const author = document.createElement('div');
+        author.className = 'book-author';
+        author.textContent = it.author;
+
+        div.appendChild(title);
+        div.appendChild(author);
+        out.appendChild(div);
+      }
+    }
+
+    async function loadBooks() {
+      out.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/books');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const body = await res.json(); // { statusCode, data, message }
+        render(body.data);
+      } catch (err) {
+        console.error('Error fetching books:', err);
+        out.textContent = 'Error fetching books.';
+      }
+    }
+
+    btn.addEventListener('click', loadBooks);
+
+    // Fetch automatically on page load
+    window.addEventListener('DOMContentLoaded', loadBooks);
+  </script>
+</body>
+</html>
